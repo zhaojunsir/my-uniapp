@@ -1,6 +1,6 @@
 <template>
 	<view>
-		Category分类页面
+		
 	</view>
 </template>
 
