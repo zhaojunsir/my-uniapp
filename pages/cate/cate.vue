@@ -1,5 +1,9 @@
 <template>
 	<view>
+		
+			<!--使用自定义搜索组件-->
+			<my-search :bgcolor="'#A00000'" :radius="20" @click="gotoSearch"></my-search>
+		
 		<!--scroll容器方便布局-->
 		<view class="scroll-view-container">
 			<!--左侧滑动区-->
@@ -17,7 +21,8 @@
 					<view class="cate-lv2-title">/{{item2.cat_name}}/</view>
 					<!--三级分类列表数据-->
 					<view class="cate-lv3-list">
-						<view class="cat-lv3-item" v-for="(item3,i3) in item2.children" :key="i3" @click="toGoodsList(item3)">
+						<view class="cat-lv3-item" v-for="(item3,i3) in item2.children" :key="i3"
+							@click="toGoodsList(item3)">
 							<image :src="item3.cat_icon"></image>
 							<text>{{item3.cat_name}}</text>
 						</view>
@@ -45,7 +50,7 @@
 			};
 		},
 		onLoad: function() {
-			this.wh = uni.getSystemInfoSync().windowHeight;
+			this.wh = uni.getSystemInfoSync().windowHeight - 50;
 			this.getCateList();
 		},
 		methods: {
@@ -67,10 +72,15 @@
 				this.scrollTop = this.scrollTop === 0 ? 0.5 : 0;
 			},
 			//点击三级分类后跳转到商品列表页面
-			toGoodsList(item3){
+			toGoodsList(item3) {
 				uni.navigateTo({
-					url:'/subpkg/goods_list/goods_list?cid='+item3.cat_id
+					url: '/subpkg/goods_list/goods_list?cid=' + item3.cat_id
 				})
+			},
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
+				});
 			}
 		}
 	}
@@ -142,4 +152,5 @@
 			}
 		}
 	}
+	
 </style>

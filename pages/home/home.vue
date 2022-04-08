@@ -1,5 +1,9 @@
 <template>
 	<view>
+		<view class="search-box">
+			<!--使用自定义搜索组件-->
+			<my-search :bgcolor="'#A00000'" :radius="20" @click="gotoSearch"></my-search>
+		</view>
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
 			<swiper-item v-for="(item,index) in swiperList" :key="index">
 				<navigator class="swiper-item" :url="'/subpkg/goods_detail/goods_detail?goods_id='+item.goods_id">
@@ -105,6 +109,11 @@
 					})
 				});
 				this.floorList = res.message;
+			},
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
+				});
 			}
 		}
 	}
@@ -146,5 +155,12 @@
 	.floor-img-box{
 		display: flex;
 		padding-left: 10rpx;
+	}
+	
+	.search-box {
+		//吸顶效果
+		position: sticky;
+		top: 0;
+		z-index: 999;
 	}
 </style>
